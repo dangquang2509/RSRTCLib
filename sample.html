@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="WebRTC code samples">
+        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+        <style>
+            video {
+                background: #222222;
+                --width: 45%;
+                width: var(--width);
+                height: calc(var(--width) * 0.75);
+                margin: 0 0 20px 0;
+                vertical-align: top;
+            }
+        </style>
+    </head>
+    <body>
+        <video id="localVideo" playsinline autoplay></video>
+        <button id="startButton">Start Capture</button>
+
+        <script src="lib/RSRTCLib.js"></script>
+        <script>
+            let client = new RSRTC();
+
+            const localVideo = document.getElementById('localVideo');
+            const startButton = document.getElementById('startButton');
+
+            startButton.addEventListener('click', start);
+
+            function start() {
+                client.startVideoCapture()
+                    .then(stream => {
+                      localVideo.srcObject = stream;
+                    })
+                    .catch(e => console.log(e))
+            }
+        </script>
+    </body>
+</html>
