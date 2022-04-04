@@ -13,11 +13,23 @@
                 margin: 0 0 20px 0;
                 vertical-align: top;
             }
+
+            button {
+                margin-top: 10px;
+            }
         </style>
     </head>
     <body>
         <video id="localVideo" playsinline autoplay></video>
-        <button id="startButton">Start Capture</button>
+        <div>
+            <button id="startButton">Start Video Capture</button>
+            <button id="stopButton">Stop Video Capture</button>
+        </div>
+
+        <div>
+            <button id="pauseButton">Pause Video Capture</button>
+            <button id="resumeButton">Resume Video Capture</button>
+        </div>
 
         <script src="lib/RSRTCLib.js"></script>
         <script>
@@ -25,8 +37,14 @@
 
             const localVideo = document.getElementById('localVideo');
             const startButton = document.getElementById('startButton');
+            const stopButton = document.getElementById('stopButton');
+            const pauseButton = document.getElementById('pauseButton');
+            const resumeButton = document.getElementById('resumeButton');
 
             startButton.addEventListener('click', start);
+            stopButton.addEventListener('click', stop);
+            pauseButton.addEventListener('click', pause);
+            resumeButton.addEventListener('click', resume);
 
             function start() {
                 client.startVideoCapture()
@@ -35,6 +53,19 @@
                     })
                     .catch(e => console.log(e))
             }
+
+            function stop() {
+                client.stopVideoCapture();
+            }
+
+            function pause() {
+              client.pauseVideoCapture();
+            }
+
+            function resume() {
+              client.resumeVideoCapture();
+            }
+
         </script>
     </body>
 </html>
