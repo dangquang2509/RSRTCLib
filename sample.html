@@ -20,6 +20,7 @@
         </style>
     </head>
     <body>
+        <h3>Video</h3>
         <video id="localVideo" playsinline autoplay></video>
         <div>
             <button id="startButton">Start Video Capture</button>
@@ -30,7 +31,14 @@
             <button id="pauseButton">Pause Video Capture</button>
             <button id="resumeButton">Resume Video Capture</button>
         </div>
+        <h3>Audio only</h3>
+        <audio id="localAudio" controls autoplay></audio>
+        <div>
+            <button id="startAudioButton">Start Audio</button>
+            <button id="stopAudioButton">Stop Audio</button>
+        </div>
 
+        <!--        Script load     -->
         <script src="lib/RSRTCLib.js"></script>
         <script>
             let client = new RSRTC();
@@ -41,17 +49,24 @@
             const pauseButton = document.getElementById('pauseButton');
             const resumeButton = document.getElementById('resumeButton');
 
+            const localAudio = document.getElementById('localAudio');
+            const startAudioButton = document.getElementById('startAudioButton');
+            const stopAudioButton = document.getElementById('stopAudioButton');
+
             startButton.addEventListener('click', start);
             stopButton.addEventListener('click', stop);
             pauseButton.addEventListener('click', pause);
             resumeButton.addEventListener('click', resume);
+
+            startAudioButton.addEventListener('click', startAudio);
+            stopAudioButton.addEventListener('click', stopAudio);
 
             function start() {
                 client.startVideoCapture()
                     .then(stream => {
                       localVideo.srcObject = stream;
                     })
-                    .catch(e => console.log(e))
+                    .catch(e => console.log(e));
             }
 
             function stop() {
@@ -64,6 +79,18 @@
 
             function resume() {
               client.resumeVideoCapture();
+            }
+
+            function startAudio() {
+              client.startAudioCapture()
+                  .then(stream => {
+                    localAudio.srcObject = stream;
+                  })
+                  .catch(e => console.log(e));
+            }
+
+            function stopAudio() {
+              client.stopAudioCapture();
             }
 
         </script>

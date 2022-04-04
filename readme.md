@@ -26,6 +26,27 @@ View demo at sample.html
     - subject: call this method to resume camera, synchronous call.
     - parameters: none
     - return: none
+    
+- `startAudioCapture`
+    - subject: call this method to open mic only media. Asynchronous call returns promise.
+    - parameters: none
+    - promise resolve: mediaStream object contains audio
+    - promise reject: error code (see below error code list)
+
+- `stopAudioCapture`
+    - subject: call this method to stop mic. synchronous call.
+    - parameters: none
+    - return: none
+    
+- `pauseAudioCapture`
+    - subject: call this method to pause mic, synchronous call.
+    - parameters: none
+    - return: none
+    
+- `resumeAudioCapture`
+    - subject: call this method to resume mic, synchronous call.
+    - parameters: none
+    - return: none
 
 
 #### Error Code
